@@ -27,18 +27,23 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/server")
-
+@Validated
 public class NkserverController {
 
     private QueryAdapter queryAdapter;
@@ -55,6 +60,21 @@ public class NkserverController {
     }
 
 
+    @GetMapping("/debug")
+    @PreAuthorize("permitAll()")
+    public Map<String, Object> debug(Authentication authentication) {
+        Map<String, Object> response = new HashMap<>();
+        response.put("principal", authentication.getPrincipal());
+        response.put("authorities", authentication.getAuthorities());
+        return response;
+    }
+
+    @GetMapping("/debug1")
+    public ResponseEntity<?> debug1(Authentication authentication) {
+        System.out.println("➡️ Authorities: " + authentication.getAuthorities());
+        return ResponseEntity.ok(authentication);
+    }
+
     @Tag(name = "Query-service",description = "query controller - get all External Products")
     @Operation(summary = "fetch data from external DB",description = "${springdoc.api-docs.query-serv.notes}")
     @ApiResponses(value = {
@@ -63,6 +83,8 @@ public class NkserverController {
     schema = @Schema(implementation = List.class)) })})
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/qallmap")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+
     public ResponseEntity<List<MapStocOpt>> queryAllMap(){
         try{
             List<MapStocOpt> response=queryAdapter.queryAllMap();

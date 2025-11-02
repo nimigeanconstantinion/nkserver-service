@@ -12,6 +12,7 @@ import java.util.List;
 public interface QueryClient {
     @GetMapping("")
     ResponseEntity<List<MapStocOpt>> queryAll();
+
     @GetMapping("/byid/{idP}")
     ResponseEntity<MapStocOpt> getByIdProd(@PathVariable String idP);
 }

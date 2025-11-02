@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/micro_db?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://mysql:3306/micro_db?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -36,15 +36,15 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8085/realms/rsk
+          issuer-uri: http://keycloak:8085/realms/rsk
 
-#  zipkin:
-#    base-url: http://localhost:9411/
-#    collector:
-#      host: localhost
-#  sleuth:
-#    sampler:
-#      probability: 1.0
+  zipkin:
+    base-url: http://zipkin:9411/
+    collector:
+      host: zipkin
+  sleuth:
+    sampler:
+      probability: 1.0
 #token:
 #  jwt:
 #    secretKey: 413F4428472783999G9329HND9032MPENKSE9UND0303900291NNE0DNQ9WQWN0239NDE94B6250655368566D5970337336763979244226452948404D6351
@@ -93,8 +93,8 @@ springdoc:
 
 
 param:
-  command-service: localhost
-  query-service: localhost
+  command-service: command-service
+  query-service: query-service
   query-port: 8082
 
 metrics:
@@ -122,7 +122,7 @@ logging:
     name: nkserver-logs.log
   logstash:
     enabled: false
-    destination: localhost:3100
+    destination: logstash:3100
     level: OFF  # Set to ALL to enable, OFF to disable
 
 cors:
