@@ -17,6 +17,9 @@ COPY .mvn .mvn
 # Copy the pom.xml file to download dependencies
 COPY pom.xml .
 
+# Asigură-te că mvnw are permisiune de execuție
+RUN chmod +x mvnw
+
 # Build all the dependencies in preparation to go offline.
 # This is a separate step so the dependencies will be cached unless changes to pom.xml are made.
 RUN ./mvnw dependency:go-offline -B
