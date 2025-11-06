@@ -126,4 +126,4 @@ logging:
     level: OFF  # Set to ALL to enable, OFF to disable
 
 cors:
-  allowed-origin: ${ADDITIONAL_CORS_ORIGIN:http://localhost:5000,http://localhost:3000}
+  allowed-origin: ${ADDITIONAL_CORS_ORIGIN:http://localhost:5000,http://localhost:3000,http://client:3000,http://edge:5000}
