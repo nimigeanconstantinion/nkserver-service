@@ -37,9 +37,9 @@ spring:
       resourceserver:
         jwt:
 #          issuer-uri: http://localhost:8085/realms/rsk
-          issuer-uri: http://keycloak:8080/realms/rsk
-
-
+          issuer-uri: http://localhost:8085/realms/rsk
+          jwk-set-uri: http://keycloak:8080/realms/rsk/protocol/openid-connect/certs
+  
   zipkin:
     base-url: http://zipkin:9411/
     collector:
