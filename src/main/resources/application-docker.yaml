@@ -36,7 +36,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak:8085/realms/rsk
+          issuer-uri: http://localhost:8085/realms/rsk
 
   zipkin:
     base-url: http://zipkin:9411/
