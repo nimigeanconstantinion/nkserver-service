@@ -55,18 +55,16 @@ public class SecurityConfig {
         return http.build();
     }
 
-//    @Bean
-//    public JwtDecoder jwtDecoder() {
-//        NimbusJwtDecoder decoder = NimbusJwtDecoder
-//                .withJwkSetUri("http://localhost:8085")
-//                .build();
-//
-//        // ✅ Dezactivează verificarea issuer-ului
-//        decoder.setJwtValidator(JwtValidators.createDefaultWithoutIssuer());
-//
-//        return decoder;
-//    }
+    @Bean
+    public JwtDecoder jwtDecoder() {
+        NimbusJwtDecoder decoder =
+                NimbusJwtDecoder.withJwkSetUri(
+                        "http://localhost:8085/realms/rsk/protocol/openid-connect/certs"
+                ).build();
 
+        decoder.setJwtValidator(JwtValidators.createDefault());
+        return decoder;
+    }
 
     @Bean
     JwtAuthenticationConverter jwtAuthenticationConverter() {
