@@ -61,7 +61,7 @@ public class NkserverController {
 
 
     @GetMapping("/debug")
-    @PreAuthorize("permitAll()")
+//    @PreAuthorize("permitAll()")
     public Map<String, Object> debug(Authentication authentication) {
         Map<String, Object> response = new HashMap<>();
         response.put("principal", authentication.getPrincipal());
@@ -83,7 +83,7 @@ public class NkserverController {
     schema = @Schema(implementation = List.class)) })})
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/qallmap")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 
     public ResponseEntity<List<MapStocOpt>> queryAllMap(){
         try{
@@ -102,7 +102,7 @@ public class NkserverController {
     @Tag(name = "Command-service")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/comallmap")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<List<MapStocOpt>> comAllMap(){
         try{
             List<MapStocOpt> response=commandAdapter.getComAll();
@@ -118,7 +118,7 @@ public class NkserverController {
     @Tag(name = "Command-service")
     @ResponseStatus(HttpStatus.OK)
     @GetMapping("/mapbyid/{idProd}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<MapStocOpt> queryByIdProd(@PathVariable String idProd){
         try{
             MapStocOpt mp=queryAdapter.queryByIdProd(idProd);
@@ -132,7 +132,7 @@ public class NkserverController {
     @Tag(name = "Command-service")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/addmap")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<MapStocOpt> addMapStocOpt(@RequestBody MapStocOpt mp){
         try{
 
@@ -149,7 +149,7 @@ public class NkserverController {
     @Tag(name = "Command-service")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/addbulk")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Boolean> addBulkMapStocOpt(@RequestBody List<MapStocOpt> mp){
         MyMessage myMessage=new MyMessage();
         myMessage.setPriority(1);
@@ -169,7 +169,7 @@ public class NkserverController {
     @Tag(name = "Command-service")
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping("/del/{idP}")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<Boolean> delMapByID(@PathVariable String idP){
         MyMessage myMessage=new MyMessage();
         myMessage.setPriority(1);
@@ -191,7 +191,7 @@ public class NkserverController {
             description = "${}")
     @ResponseStatus(HttpStatus.OK)
     @PostMapping("/upd")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
 
     public ResponseEntity<MapStocOpt> updateMapStoc(@RequestBody MapStocOpt uMap){
         MyMessage myMessage=new MyMessage();
